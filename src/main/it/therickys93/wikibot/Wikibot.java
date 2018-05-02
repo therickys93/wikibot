@@ -11,6 +11,7 @@ public class Wikibot {
 
 	public static void main(String[] args){
 		TelegramBot bot = new TelegramBot(Configurations.telegramBotToken());
+		List<Long> authorizedUsers = Configurations.authorizedUsers();
 		
 		bot.setUpdatesListener(new UpdatesListener() {
 		    @Override
@@ -18,7 +19,14 @@ public class Wikibot {
 		    	System.out.println(updates.toString());
 		    	
 		    	for(Update update : updates){
-		    		bot.execute(new SendMessage(update.message().chat().id(), update.message().text()));
+		    		Long chat_id = update.message().chat().id();
+		    		String text = update.message().text();
+		    		if(authorizedUsers != null && authorizedUsers.contains(update.message().chat().id())){
+			    		bot.execute(new SendMessage(chat_id, text));
+		    		} else {
+		    			bot.execute(new SendMessage(chat_id, "Non sei autorizzato!!!"));
+		    		}
+		    		
 		    	}
 
 		        return UpdatesListener.CONFIRMED_UPDATES_ALL;

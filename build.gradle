@@ -30,6 +30,12 @@ jacocoTestReport {
         csv.enabled false
         html.destination "${buildDir}/reports/jacoco"
     }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: "${buildDir}/classes/main", 
+            exclude: ['it/therickys93/wikibot/Wikibot*.class'])
+        })
+    }
 }
 
 repositories {
