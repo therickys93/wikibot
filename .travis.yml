@@ -5,3 +5,27 @@ services:
 - docker
 script:
 - "./gradlew clean check jacocoTestReport stage"
+- docker build -t therickys93/wikiserver .
+after_success:
+- if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; docker push therickys93/wikiserver;
+  fi
+- sh set_tags.sh
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.gradle
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+deploy:
+  provider: releases
+  api_key:
+    secure: YNm0BG5T+B+jhaxNDQ/1/veIlZ/gHKAr3uh4qlaQMpfGky9hEZIhMLwS8UMSxNTUIz2fkOqJVw8vE22h2PZSDiCpdsgoN8UZ5Za9ePOZIGZA9l3Sue2611vn4/zaw9vd+MhTyF7e5jVVSzW/3/CrNOpswg1PWSAsZv+Uq947iQ9YcFtM8DedCFEHOplEO57oE5w2Hvq80Eo1+MPaOdobfVXp0tBNC0bsWI764Eox0sKZGbeyP55fXJoXFkNeMASCGFILgygipWdmcQ8A0WMu6WNprdp3P4Mewo8ra4dzTnCoctjMPQ3vuZsh0lNsTapyRMCUqEvs3xv0yQLaOTgxPMUAsb3yLyRQh8zhw9rSIaORdWk/jB465XgQhgNGMIlrTiH2h3wfLNs+vA+IfBfyPAV99nzhiuVKQ8iKiyOj1EWETEnjcIOUUgXSbUuymKwh9bHT1HlSkUcd1LEz+6QGdx0CBuWxMFkauFK29+VIO1FZyVNv9n0LKfBY+9sU+KcEVvqzJ//xyH1XIz33n7F7lceabVNfVAGBag3pSTiXpE/5016iEq2zbVOWu9Iz6oswV9OUHbIQ10SKq/8ilxYUC4SV3QD4jt0zSZlrLb2jHn5hqnD6yQqKv8jQFQG4lsl33DTlda9EllWMtwLW/1z/5F/Pv2ZDwu2NaSGMGwmzudo=
+  file: build/libs/wikibot.jar
+  file_glob: "true"
+  skip_cleanup: true
+  on:
+    branch: master
+    repo: therickys93/wikibot
