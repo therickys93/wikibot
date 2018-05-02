@@ -47,6 +47,9 @@ repositories {
 
 dependencies {
 	compile 'com.github.pengrad:java-telegram-bot-api:3.6.0'
+	compile 'com.google.code.gson:gson:2.8.0'
+	compile 'com.squareup.okhttp3:okhttp:3.6.0'
+	compile 'com.github.therickys93:wikiapi:1.5.45'
     testCompile 'junit:junit:4.12'
     testCompile 'com.github.stefanbirkner:system-rules:1.17.0'
 }

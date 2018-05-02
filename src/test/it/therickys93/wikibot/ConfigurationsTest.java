@@ -29,6 +29,13 @@ public class ConfigurationsTest {
 	}
 	
 	@Test
+	public void testWikiServer(){
+		assertEquals("http://localhost:8080", Configurations.wikiServer());
+		environmentVariables.set("WIKITELEGRAM_WIKI_SERVER", "http://wiki");
+		assertEquals("http://wiki", Configurations.wikiServer());
+	}
+	
+	@Test
 	public void testImproveCodeCoverage(){
 		Configurations conf = new Configurations();
 		assertNotNull(conf.toString());

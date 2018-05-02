@@ -1,5 +1,6 @@
 package it.therickys93.wikibot;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.pengrad.telegrambot.TelegramBot;
@@ -22,7 +23,14 @@ public class Wikibot {
 		    		Long chat_id = update.message().chat().id();
 		    		String text = update.message().text();
 		    		if(authorizedUsers != null && authorizedUsers.contains(update.message().chat().id())){
-			    		bot.execute(new SendMessage(chat_id, text));
+		    			Wiki wiki = new Wiki(Configurations.wikiServer());
+		    			String response = "";
+		    			try {
+							response = wiki.executeMessage(text);
+						} catch (IOException e) {
+							response = "problema nel contattare il server";
+						}
+			    		bot.execute(new SendMessage(chat_id, response));
 		    		} else {
 		    			bot.execute(new SendMessage(chat_id, "Non sei autorizzato!!!"));
 		    		}
