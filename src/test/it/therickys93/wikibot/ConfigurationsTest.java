@@ -28,6 +28,12 @@ public class ConfigurationsTest {
 		assertEquals(authorizedUsers(), Configurations.authorizedUsers());
 	}
 	
+	@Test
+	public void testImproveCodeCoverage(){
+		Configurations conf = new Configurations();
+		assertNotNull(conf.toString());
+	}
+	
 	private List<Long> authorizedUsers(){
 		List<Long> users = new ArrayList<Long>();
 		users.add(new Long(12345678));

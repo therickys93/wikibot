@@ -26,6 +26,12 @@ public class UtilsTest {
 		assertEquals(multipleUsers(), Utils.parseAuthorizedEnv("12345678,87654321,13578642"));
 	}
 	
+	@Test
+	public void testImproveCodeCoverage(){
+		Utils util = new Utils();
+		assertNotNull(util.toString());
+	}
+	
 	private List<Long> oneUser(long value){
 		List<Long> user = new ArrayList<Long>();
 		user.add(new Long(value));
