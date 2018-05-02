@@ -21,4 +21,12 @@ public class Configurations {
 		}
 	}
 
+	public static String wikiServer() {
+		if(System.getenv("WIKITELEGRAM_WIKI_SERVER") != null) {
+			return System.getenv("WIKITELEGRAM_WIKI_SERVER");
+		} else {
+			return "http://localhost:8080";
+		}
+	}
+
 }
