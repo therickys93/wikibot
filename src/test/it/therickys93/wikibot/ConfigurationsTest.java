@@ -36,6 +36,34 @@ public class ConfigurationsTest {
 	}
 	
 	@Test
+	public void testMongoDBHost(){
+		assertEquals("localhost", Configurations.mongoDBHost());
+		environmentVariables.set("WIKITELEGRAM_MONGODB_HOST", "mongodb");
+		assertEquals("mongodb", Configurations.mongoDBHost());
+	}
+	
+	@Test
+	public void testMongoDBPort(){
+		assertEquals(27017, Configurations.mongoDBPort());
+		environmentVariables.set("WIKITELEGRAM_MONGODB_PORT", "12345");
+		assertEquals(12345, Configurations.mongoDBPort());
+	}
+	
+	@Test
+	public void testMongoDBDatabase(){
+		assertEquals("wikibot", Configurations.mongoDBDatabase());
+		environmentVariables.set("WIKITELEGRAM_MONGODB_DB", "telegram");
+		assertEquals("telegram", Configurations.mongoDBDatabase());
+	}
+	
+	@Test
+	public void testMongoDBCollection(){
+		assertEquals("telegram", Configurations.mongoDBCollection());
+		environmentVariables.set("WIKITELEGRAM_MONGODB_COLLECTION", "messages");
+		assertEquals("messages", Configurations.mongoDBCollection());
+	}
+	
+	@Test
 	public void testImproveCodeCoverage(){
 		Configurations conf = new Configurations();
 		assertNotNull(conf.toString());
