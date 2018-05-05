@@ -29,4 +29,36 @@ public class Configurations {
 		}
 	}
 
+	public static String mongoDBHost() {
+		if(System.getenv("WIKITELEGRAM_MONGODB_HOST") != null) {
+			return System.getenv("WIKITELEGRAM_MONGODB_HOST");
+		} else {
+			return "localhost";
+		}
+	}
+
+	public static int mongoDBPort() {
+		if(System.getenv("WIKITELEGRAM_MONGODB_PORT") != null) {
+			return Integer.parseInt(System.getenv("WIKITELEGRAM_MONGODB_PORT"));
+		} else {
+			return 27017;
+		}
+	}
+
+	public static String mongoDBDatabase() {
+		if(System.getenv("WIKITELEGRAM_MONGODB_DB") != null) {
+			return System.getenv("WIKITELEGRAM_MONGODB_DB");
+		} else {
+			return "wikibot";
+		}
+	}
+
+	public static String mongoDBCollection() {
+		if(System.getenv("WIKITELEGRAM_MONGODB_COLLECTION") != null) {
+			return System.getenv("WIKITELEGRAM_MONGODB_COLLECTION");
+		} else {
+			return "telegram";
+		}
+	}
+
 }
