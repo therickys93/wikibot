@@ -61,4 +61,11 @@ public class Configurations {
 		}
 	}
 
+	public static int telegramNotificationPort() {
+		if(System.getenv("WIKITELEGRAM_NOTIFICATION_PORT") != null){
+			return Integer.parseInt(System.getenv("WIKITELEGRAM_NOTIFICATION_PORT"));
+		} else {
+			return 8081;
+		}
+	}
 }

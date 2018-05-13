@@ -12,7 +12,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 public class NotificationManagement {
 
 	public static void execute(){
-		port(8081);
+		port(Configurations.telegramNotificationPort());
 		
 		internalServerError((req, res) -> {
 		    res.type("application/json");
