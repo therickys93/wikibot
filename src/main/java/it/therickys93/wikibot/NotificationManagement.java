@@ -19,7 +19,7 @@ public class NotificationManagement {
 		    return "{\"success\":false}";
 		});
 		
-		post("/test", "application/json", (req,res) -> {
+		post("/notify", "application/json", (req,res) -> {
 			 JsonParser parser = new JsonParser();
 			 JsonObject obj = parser.parse(req.body()).getAsJsonObject();
 			 String message = obj.get("message").getAsString();
