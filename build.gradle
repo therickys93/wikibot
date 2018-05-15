@@ -28,7 +28,7 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled false
-        html.destination "${buildDir}/reports/jacoco"
+        html.destination file("${buildDir}/reports/jacoco")
     }
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
@@ -51,6 +51,8 @@ dependencies {
 	compile 'com.squareup.okhttp3:okhttp:3.6.0'
 	compile 'com.github.therickys93:wikiapi:1.5.45'
 	compile 'org.mongodb:mongo-java-driver:2.13.3'
+	compile 'com.sparkjava:spark-core:2.7.2'
+	compile 'org.slf4j:slf4j-simple:1.7.21'
     testCompile 'junit:junit:4.12'
     testCompile 'com.github.stefanbirkner:system-rules:1.17.0'
 }

@@ -64,6 +64,13 @@ public class ConfigurationsTest {
 	}
 	
 	@Test
+	public void testBotNotificationPort(){
+		assertEquals(8081, Configurations.telegramNotificationPort());
+		environmentVariables.set("WIKITELEGRAM_NOTIFICATION_PORT", "1234");
+		assertEquals(1234, Configurations.telegramNotificationPort());
+	}
+	
+	@Test
 	public void testImproveCodeCoverage(){
 		Configurations conf = new Configurations();
 		assertNotNull(conf.toString());
